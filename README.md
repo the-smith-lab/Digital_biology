@@ -10,5 +10,5 @@ Resources:
 - see [examples and edge cases here](https://linuxblog.io/linux-securely-copy-files-using-scp/).
 
 
-##### screenshots from Poll Everywhere]
-[Week 2](https://docs.google.com/document/d/13oLcTltJeTbUQqVc598iFtIgqPRfr4raEcISe_85Xj0/edit?tab=t.0))
+##### (screenshots from Poll Everywhere)
+[Week 2](https://docs.google.com/document/d/13oLcTltJeTbUQqVc598iFtIgqPRfr4raEcISe_85Xj0/edit?tab=t.0)
