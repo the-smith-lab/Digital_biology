@@ -7,6 +7,9 @@ Here I will compile notes on topics flagged in class as confusing, challenging, 
 ### GitHub Classroom account setup
 Check your email from GH, that link tends to work instead of the auto-generated one.
 
+## Keyboard doesn't communicate with shell as expected
+Working on this...
+
 ### SCP
 Resources:
 - description in Assignment 2, Part I, Step 7.
