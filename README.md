@@ -10,6 +10,10 @@ Check your email from GH, that link tends to work instead of the auto-generated 
 ### Keyboard doesn't communicate with shell as expected
 Working on this...
 
+### `nano`
+**How to undo?** `EST` + `u` should do it at least with macbook. 
+
+
 ### SCP
 Resources:
 - description in Assignment 2, Part I, Step 7.
