@@ -14,11 +14,17 @@ Working on this...
 
 ### `nano`
 **How to undo?** `EST` + `u` should do it at least with macbook. 
+
 **How to ctrl-F on Windows?** `ctrl-W` should do it.
 
 ### SCP
 Resources:
 - description in Assignment 2, Part I, Step 7.
 - see [examples and edge cases here](https://linuxblog.io/linux-securely-copy-files-using-scp/).
+
+### Where to store my data on Quartz/BigRed?
+Class project? -> `/N/slate/`  (long term storage for intermediate-sized files)
+Assignments? -> `/N/slate/` is fine. Scratch is also fine if your run out of space but gets deleted.
+Temporary files? -> `/N/scratch/`
 
 
