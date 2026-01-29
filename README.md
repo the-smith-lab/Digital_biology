@@ -24,7 +24,9 @@ Resources:
 
 ### Where to store my data on Quartz/BigRed?
 Class project? -> `/N/slate/`  (long term storage for intermediate-sized files)
+
 Assignments? -> `/N/slate/` is fine. Scratch is also fine if your run out of space but gets deleted.
+
 Temporary files? -> `/N/scratch/`
 
 
