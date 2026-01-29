@@ -1,5 +1,5 @@
 # Troubleshooting Notes
-Here I will compile notes on topics flagged in class as confusing, challenging, or that lead to computer errors.
+Here we will compile topics flagged in class as confusing, challenging, or that lead to computer errors.
 
 [link to Screenshots from Poll Everywhere](https://docs.google.com/document/d/13oLcTltJeTbUQqVc598iFtIgqPRfr4raEcISe_85Xj0/edit?tab=t.0)
 
