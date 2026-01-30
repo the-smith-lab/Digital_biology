@@ -17,14 +17,29 @@ Working on this...
 
 **How to ctrl-F on Windows?** `ctrl-W` should do it.
 
-### password-less login to HPC
+### HPC login without username and full address
+On your laptop type `mkdir -p ~/.ssh; touch .ssh/config`. And then copy this code block into the terminal, replacing "chriscs" with your username:
+```
+cat <<'EOF' >> ~/.ssh/config
+Host bigred
+     HostName bigred200.uits.iu.edu
+     User chriscs
+Host quartz
+     HostName quartz.uits.iu.edu
+     User chriscs
+EOF
+```
+(Not certain if this works on Windows.)
+
+
+### HPC login without password
 1. Submit [SSH Key Agreement Form](https://uitsradl-fireform.eas.iu.edu/online/form/authen/sshkeyagreement?_gl=1*8qqlu3*_gcl_au*MTQzNjQzNDk1NS4xNzY1MjA1NzQ1*_ga*NDE0MjE5Njc3LjE3NTQwNjE5MDI.*_ga_61CH0D2DQW*czE3Njk3OTE2MTUkbzY0JGcwJHQxNzY5NzkxNjE1JGo2MCRsMCRoMA..), in which you agree to set a passphrase on your private key when you generate your key pair.
 2. On your laptop run: `ssh-keygen -t rsa`. Press `ENTER` to accept default file path. When prompted for a password type in the new password you want to use to login; if you press `ENTER` without typing anything, this means no password.
 3. Next copy your "key" to Quartz (or BigRed) `scp ~/.ssh/id_rsa.pub <username>@quartz.uits.iu.edu:~/`
 4. Log into Quartz (or BigRed).
 5. Run `mkdir -p ~/.ssh; touch ~/.ssh/authorized_keys; cat ~/id_rsa.pub >> ~/.ssh/authorized_keys`
 
-That should do it. More info here: https://servicenow.iu.edu/kb?id=kb_article_view&sysparm_article=KB0023919
+That should do it for macbook (not certain if this works on Windows). More info here: https://servicenow.iu.edu/kb?id=kb_article_view&sysparm_article=KB0023919
 
 ### SCP
 Resources:
