@@ -29,7 +29,7 @@ Host quartz
      User chriscs
 EOF
 ```
-(Not certain if this works on Windows.)
+Now you should be able to SSH with `ssh quartz` instead of the full command (not certain if this works on Windows.)
 
 
 ### HPC login without password
