@@ -17,6 +17,15 @@ Working on this...
 
 **How to ctrl-F on Windows?** `ctrl-W` should do it.
 
+### password-less login to HPC
+1. Submit the ["SSH public key authentication to HPS systems" agreement]("SSH public key authentication to HPS systems" agreement), in which you agree to set a passphrase on your private key when you generate your key pair.
+2. On your laptop run: `ssh-keygen -t rsa`. Press `ENTER` to accept default file path. When prompted for a password type in the new password you want to use to login; if you press `ENTER` without typing anything, this means no password.
+3. Next copy your "key" to Quartz (or BigRed) `scp ~/.ssh/id_rsa.pub <username>@quartz.uits.iu.edu:~/`
+4. Log into Quartz (or BigRed).
+5. Run `mkdir -p ~/.ssh; touch ~/.ssh/authorized_keys; cat ~/id_rsa.pub >> ~/.ssh/authorized_keys`
+
+That should do it. More info here: https://servicenow.iu.edu/kb?id=kb_article_view&sysparm_article=KB0023919
+
 ### SCP
 Resources:
 - description in Assignment 2, Part I, Step 7.
