@@ -4,7 +4,7 @@ Here we will compile topics flagged in class as confusing, challenging, or that 
 [link to Screenshots from Poll Everywhere](https://docs.google.com/document/d/13oLcTltJeTbUQqVc598iFtIgqPRfr4raEcISe_85Xj0/edit?tab=t.0)
 
 ### `CTRL` + `f` on Windows
-To search for some text inside your gish bash window, if CTRL-F doesn't work try right clicking and then "Search"
+To search for some text inside your git bash window, if CTRL-F doesn't work try right clicking and then "Search"
 
 ### GitHub Classroom account setup
 Check your email from GH, that link tends to work instead of the auto-generated one.
