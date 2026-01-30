@@ -18,7 +18,7 @@ Working on this...
 **How to ctrl-F on Windows?** `ctrl-W` should do it.
 
 ### HPC login without username and full address
-On your laptop type `mkdir -p ~/.ssh; touch .ssh/config`. And then copy this code block into the terminal, replacing "chriscs" with your username:
+On your laptop run `mkdir -p ~/.ssh; touch .ssh/config`. And then copy this code block into the terminal, replacing "chriscs" with your username:
 ```
 cat <<'EOF' >> ~/.ssh/config
 Host bigred
