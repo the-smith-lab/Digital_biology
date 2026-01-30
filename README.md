@@ -18,8 +18,7 @@ Working on this...
 **How to ctrl-F on Windows?** `ctrl-W` should do it.
 
 ### password-less login to HPC
-1. Submit [SSH Key Agreement Form](https://uitsradl-fireform.eas.iu.edu/online/form/authen/sshkeyagreement?_gl=1*8qqlu3*_gcl_au*MTQzNjQzNDk1NS4xNzY1MjA1NzQ1*_ga*NDE0MjE5Njc3LjE3NTQwNjE5MDI.*_ga_61CH0D2DQW*czE3Njk3OTE2MTUkbzY0JGcwJHQxNzY5NzkxNjE1JGo2MCRsMCRoMA..)
-, in which you agree to set a passphrase on your private key when you generate your key pair.
+1. Submit [SSH Key Agreement Form](https://uitsradl-fireform.eas.iu.edu/online/form/authen/sshkeyagreement?_gl=1*8qqlu3*_gcl_au*MTQzNjQzNDk1NS4xNzY1MjA1NzQ1*_ga*NDE0MjE5Njc3LjE3NTQwNjE5MDI.*_ga_61CH0D2DQW*czE3Njk3OTE2MTUkbzY0JGcwJHQxNzY5NzkxNjE1JGo2MCRsMCRoMA..), in which you agree to set a passphrase on your private key when you generate your key pair.
 2. On your laptop run: `ssh-keygen -t rsa`. Press `ENTER` to accept default file path. When prompted for a password type in the new password you want to use to login; if you press `ENTER` without typing anything, this means no password.
 3. Next copy your "key" to Quartz (or BigRed) `scp ~/.ssh/id_rsa.pub <username>@quartz.uits.iu.edu:~/`
 4. Log into Quartz (or BigRed).
