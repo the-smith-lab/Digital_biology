@@ -38,6 +38,7 @@ Now you should be able to SSH with `ssh quartz` instead of the full command (not
 3. Next copy your "key" to Quartz (or BigRed) `scp ~/.ssh/id_rsa.pub <username>@quartz.uits.iu.edu:~/`
 4. Log into Quartz (or BigRed).
 5. Run `mkdir -p ~/.ssh; touch ~/.ssh/authorized_keys; cat ~/id_rsa.pub >> ~/.ssh/authorized_keys`
+6. Finally, run `rm ~/id_rsa.pub`
 
 That should do it for macbook (not certain if this works on Windows). More info here: https://servicenow.iu.edu/kb?id=kb_article_view&sysparm_article=KB0023919
 
