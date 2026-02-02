@@ -44,7 +44,7 @@ That should do it for macbook (not certain if this works on Windows). More info 
 
 ### SCP
 Resources:
-- description in Assignment 2, Part I, Step 7.
+- description in Assignment 2, Part I, Step 7. Also see failure modes in the class slides. Usually the trick is giving correct file paths on both ends.
 - see [examples and edge cases here](https://linuxblog.io/linux-securely-copy-files-using-scp/).
 
 ### Where to store my data on Quartz/BigRed?
