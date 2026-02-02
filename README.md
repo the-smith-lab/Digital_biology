@@ -6,6 +6,9 @@ Here we will compile topics flagged in class as confusing, challenging, or that 
 ### `CTRL` + `f` on Windows
 To search for some text inside your git bash window, if CTRL-F doesn't work try right clicking and then "Search"
 
+### File paths
+File paths are tricky at first! Assignment 2 "Part I" is designed for practicing file paths. The online Hendrix text (link under Module 1 on canvas) provides further reading. If you still have trouble stop by office hours.
+
 ### GitHub Classroom account setup
 Check your email from GH, that link tends to work instead of the auto-generated one.
 
