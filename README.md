@@ -11,7 +11,7 @@ File paths are tricky at first! Assignment 2 "Part I" is designed for practicing
 Check your email from GH, that link tends to work instead of the auto-generated one.
 
 ### Keyboard doesn't communicate with shell as expected
-- Research Desktop. The keyboard shortcuts we use don't work on the Research Desktop. And in general we want to wean off the Research Desktop and use a basic shell.
+- Research Desktop. The keyboard shortcuts we use don't work in Research Desktop. And in general we want to wean off the Research Desktop and use a basic shell.
 - Non-US computer. We may or may not be able to troubleshoot this. First, come to office hours and we can try changing your settings. Alternatively, email biocomp@iu.edu to borrow a computer.
 
 ### `nano`
