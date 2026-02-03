@@ -1,19 +1,18 @@
 # Troubleshooting Notes
 Here we will compile topics flagged in class as confusing, challenging, or that lead to computer errors.
 
-[link to Screenshots from Poll Everywhere](https://docs.google.com/document/d/13oLcTltJeTbUQqVc598iFtIgqPRfr4raEcISe_85Xj0/edit?tab=t.0)
-
 ### `CTRL` + `f` on Windows
-To search for some text inside your git bash window, if CTRL-F doesn't work try right clicking and then "Search"
+To search for some text inside your git bash window, if CTRL-F doesn't work try right clicking and then click "Search".
 
 ### File paths
-File paths are tricky at first! Assignment 2 "Part I" is designed for practicing file paths. The online Hendrix text (link under Module 1 on canvas) provides further reading. If you still have trouble stop by office hours.
+File paths are tricky at first! Assignment 2 "Part I" is designed for practicing file paths. The online Hendrix text (link under Module 1 on canvas) provides further reading. If you still have trouble come to office hours.
 
 ### GitHub Classroom account setup
 Check your email from GH, that link tends to work instead of the auto-generated one.
 
 ### Keyboard doesn't communicate with shell as expected
-Working on this...
+- Research Desktop. The keyboard shortcuts we use don't work on the Research Desktop. And in general we want to wean off the Research Desktop and use a basic shell.
+- Non-US computer. We may or may not be able to troubleshoot this. First, come to office hours and we can try changing your settings. Alternatively, email biocomp@iu.edu to borrow a computer.
 
 ### `nano`
 **How to undo?** `EST` + `u` should do it at least with macbook. 
