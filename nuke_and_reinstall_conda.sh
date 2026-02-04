@@ -8,6 +8,7 @@ echo "removing"
 rm -rf ~/.mamba  # important if your mamba install got interrupted
 rm -rf ~/.conda
 rm Miniconda3-latest-Linux-x86_64.sh
+conda init --reverse bash
 rm -rf ~/Miniconda
 
 ### install conda
