@@ -5,6 +5,9 @@
 
 ### remove existing conda
 echo "removing"
+for i in $(seq ${CONDA_SHLVL}); do
+    conda deactivate
+done
 rm -rf ~/.mamba  # important if your mamba install got interrupted
 rm -rf ~/.conda
 rm Miniconda3-latest-Linux-x86_64.sh
