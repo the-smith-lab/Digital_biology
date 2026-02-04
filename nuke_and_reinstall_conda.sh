@@ -3,6 +3,9 @@
 #SBATCH --time=12:00:00
 #SBATCH --mem=20gb
 
+### Notes:
+# - If activately troubleshooting: log out, log in, deactivate, before submitting script.
+
 ### remove existing conda
 echo "removing"
 for i in $(seq ${CONDA_SHLVL}); do
