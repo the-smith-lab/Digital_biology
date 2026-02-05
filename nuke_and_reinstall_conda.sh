@@ -3,11 +3,9 @@
 #SBATCH --time=12:00:00
 #SBATCH --mem=20gb
 
-### Notes:
-# - If activately troubleshooting: log out, log in, deactivate, before submitting script.
-
 ### remove existing conda
 echo "removing"
+source ~/Miniconda/etc/profile.d/conda.sh
 for i in $(seq ${CONDA_SHLVL}); do
     conda deactivate
 done
@@ -15,6 +13,9 @@ rm -rf ~/.mamba  # important if your mamba install got interrupted
 rm -rf ~/.conda
 rm Miniconda3-latest-Linux-x86_64.sh
 conda init --reverse bash
+sed -i '/DigitalBio/d' ~/.bashrc
+sed -i '/activate conda env/d' ~/.bashrc
+source ~/.bashrc
 rm -rf ~/Miniconda
 
 ### install conda
