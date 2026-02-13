@@ -1,3 +1,5 @@
+This repo contains teaching and assignment resources for Digital Biology, a grad/undergrad bioinformatics course taught at Indiana University.
+
 # Troubleshooting Notes
 Here we will compile topics flagged in class as confusing, challenging, or that lead to computer errors.
 
