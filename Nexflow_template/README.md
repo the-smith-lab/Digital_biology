@@ -22,7 +22,7 @@ Then run this command to see how nextflow tracks runs, and copy the "SESSION ID"
 nextflow log
 ```
 
-Next run this to see the intermediate folders that were created:
+Next run this to see the paths to intermediate files that were created:
 ```
 nextflow log <SESSION ID>
 ```
