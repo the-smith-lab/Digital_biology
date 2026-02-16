@@ -8,7 +8,7 @@ module load java  # seems to work
 nextflow -version
 ```
 
-Checkout an interactive node (`srun`).
+Check out an interactive node (`srun`).
 
 Change the file paths in `nextflow.config` to ones you have access to.
 
