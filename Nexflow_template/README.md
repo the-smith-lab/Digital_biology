@@ -43,5 +43,5 @@ Nextflow requires an investment of trial and error to figure out, and then it be
                                                                                               
                                                                                        
 ### Tips and tricks
-- I often delete the whole nextflow working directory (`workdir`) as well as `.nextflow*`.
 - A running Nextflow process usually responds to a single `CTRL-C`; holding it causes Nextflow to lock down.
+- I often delete the whole nextflow working directory (`workdir`) as well as `.nextflow*`.
