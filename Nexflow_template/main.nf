@@ -4,23 +4,19 @@ params.each { k, v ->
 println "=============================\n"
 
 
-
 workflow {
-
-    // sims
-    totalsims = 100
-    chan = Channel.of( 1..totalsims )
-    sims = Simulate(chan)
-    muts = Preprocess(sims)
+    total_indices = 10
+    chan = Channel.of( 1..total_indices )
+    dls = Download(chan)
+    trims = Trim(dls)
 }
 
 
-
-process Simulate {
+process Download {
 
     // resources
     memory '1 GB'
-    time '1m'
+    time '1h'
 
     // misc. settings
     conda "${params.condadir}"
@@ -31,39 +27,38 @@ process Simulate {
     val(rep)
 
     output:
-    tuple val(rep), file("ms_out_${rep}.txt")
+    tuple val(rep), file("download_${rep}.txt")
 
     script:
     """
-    n=10
-    t=100
-    ms \$n 1 -t \$t -seeds ${rep} ${rep} ${rep} > ms_out_${rep}.txt
+    echo Done. > download_${rep}.txt
     """
 }
 
 
-
-process Preprocess {
+process Trim {
 
     // resources
     memory '1 GB'
-    time '1m'
+    time '1h'
 
     // misc. settings
-    publishDir "${params.pubdir}/Preprocessed_outputs/", pattern: "prep_*.txt", mode: 'copy'
+    publishDir "${params.pubdir}/Pipeline_outputs/", pattern: "trim_*.txt", mode: 'copy'
     conda "${params.condadir}"
     tag "${rep}"
     debug true
 
     input:
-    tuple val(rep), file(msfile)
+    tuple val(rep), file("download_${rep}.txt")
 
     output:
-    file("prep_${rep}.txt")
+    tuple val(rep), file("trim_${rep}.txt")
 
     script:
     """
-    n=10
-    tail -\$n $msfile > prep_${rep}.txt
+    cat download_${rep}.txt | rev > trim_${rep}.txt
     """
 }
+
+
+
