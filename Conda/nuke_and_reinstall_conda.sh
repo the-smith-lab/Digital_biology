@@ -1,6 +1,6 @@
 #!/bin/bash  
 #SBATCH --account=c01988
-#SBATCH --time=12:00:00
+#SBATCH --time=2:00:00
 #SBATCH --mem=20gb
 
 ### remove existing conda
