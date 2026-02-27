@@ -22,6 +22,9 @@ Check your email from GH, that link tends to work instead of the auto-generated 
 ### `nano`
 - **How to undo?** `EST` + `u` (at least with macbook).
 - **How to ctrl-F on Windows?** `ctrl-W` should do it.
+- **How to pause nano so you can test a script while editing?**
+     - bigred: `CTRL+T+CTRL+Z` to pause; then `fg` on the command line to return (don't forget to save, still)
+     - quartz: 
 
 ### HPC login without username and full address
 On your laptop run `mkdir -p ~/.ssh; touch .ssh/config`. And then copy this code block into the terminal, replacing "chriscs" with your username:
