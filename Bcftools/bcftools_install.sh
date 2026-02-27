@@ -15,5 +15,5 @@ make
 # add to bashrc
 echo >> ~/.bashrc
 echo "# bcftools" >> ~/.bashrc
-echo PATH=\$PATH:$install_dir/bcftools/ >> ~/.bashrc
+echo PATH=$install_dir/bcftools/:\$PATH >> ~/.bashrc
 
