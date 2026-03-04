@@ -16,4 +16,5 @@ make
 echo >> ~/.bashrc
 echo "# bcftools" >> ~/.bashrc
 echo PATH=$install_dir/bcftools/:\$PATH >> ~/.bashrc
+echo export BCFTOOLS_PLUGINS=/N/u/chriscs/Software/bcftools/plugins/ >> ~/.bashrc
 
