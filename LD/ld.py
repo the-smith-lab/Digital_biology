@@ -87,7 +87,7 @@ midpt =  bins[:-1] + (bins[1:] - bins[:-1])/2
 plt.plot(midpt, r2_means, marker='o', linestyle='-')
 plt.xscale('log')
 plt.xlabel("Distance between SNPs (bp)")
-plt.ylabel(r"$r^2$")
+plt.ylabel(r"Mean $r^2 in bin$")
 plt.title("LD decay")
 plt.tight_layout()
 plt.savefig("ld_decay.pdf")
