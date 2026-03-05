@@ -7,72 +7,91 @@ from scipy.spatial.distance import pdist
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 
-
-
-infile = sys.argv[1]
-
 ### params
-numbins=20
-min_val = 1e4
-max_val = 1e8
+infile = sys.argv[1]
+numbins=50
+min_val = 1
+max_val = 1e9
+
+def ld(geno_mat, pos_mat):
+    geno_mat = np.array(geno_mat)
+    pos_mat = np.array(pos_mat)
+    g = allel.GenotypeArray(geno_mat)
+    gn = g.to_n_alt(fill=-1)
+    pos = np.expand_dims(pos_mat,-1)
+    dist = pdist(pos)
+    dist = np.array(dist)
+    r = allel.rogers_huff_r(gn[:, :])
+    r2 = r**2
+    return r2, dist
 
 ### read vcf
 geno_mat = []
 pos_mat = []
-vcf = open(infile, "r")
-for line in vcf:
-    if line[0:2] == "##":
-        pass
-    elif line[0] == "#":
-        header = line.strip().split("\t")
-        n = len(header) - 9
-    else:
-        newline = line.strip().split("\t")
-        genos = []
-        alleles = {}
-        for field in range(9, len(newline)):
+current_chrom = "INIT"
+r2s,dists = [],[]
+with open(infile) as vcf:
+    for line in vcf:
+        if line[0:2] == "##":
+            pass
+        elif line[0] == "#":
+            header = line.strip().split("\t")
+            n = len(header) - 9
+        else:
+            newline = line.strip().split("\t")
+            chrom = newline[0]
+            if chrom != current_chrom and current_chrom != "INIT":
+                print("\t finished chrom", current_chrom)
+                if len(geno_mat) > 2:  # 2 instead of 1 means >1 comparison; consistent arrayshapes
+                    r2, dist = ld(geno_mat, pos_mat)
+                    r2s.append(r2)
+                    dists.append(dist)
+                #
+                geno_mat = []
+                pos_mat = []
+
+            #
+            current_chrom = str(chrom)
+            genos = []
+            alleles = {}
             pos = float(newline[1])
-            geno = newline[field].split(":")[0].split("/")
-            if "." in geno:  # missing
-                alleles.setdefault(-1, 0)
-                alleles[-1] += 1
-            else:
+            for field in range(9, len(newline)):
+                geno = newline[field].split(":")[0].split("/")
                 alleles.setdefault(int(geno[0]), 0)
                 alleles[int(geno[0])] += 1
                 alleles.setdefault(int(geno[1]), 0)
                 alleles[int(geno[1])] += 1
                 genos.append( [int(geno[0]), int(geno[1])] )  # still phased at this point
-        #
-        if -1 not in alleles and len(list(alleles.keys())) == 2:  # filters non-missing AND biallelic
 
-            # recalculate major/minor allele
-            major, minor = list(alleles.keys())  # (random init)
-            if alleles[major] < alleles[minor]:
-                major, minor = minor, major
-            #                                                  
-            new_genotypes = []
-            for i in range(n):
-                new_genotype = [None, None]
-                for j in range(2):  # diploid
-                    if genos[i][j] == major:
-                        new_genotype[j] = 0
-                    else:
-                        new_genotype[j] = 1
-                #                                              
-                new_genotypes.append(new_genotype)
             #
-            geno_mat.append(new_genotypes)
-            pos_mat.append(pos)
+            if len(list(alleles.keys())) == 2:  # filters for biallelic
 
-### calc LD
-geno_mat = np.array(geno_mat)
-pos_mat = np.array(pos_mat)
-g = allel.GenotypeArray(geno_mat)
-gn = g.to_n_alt(fill=-1)
-pos = np.expand_dims(pos_mat,-1)
-dist = pdist(pos)
-r = allel.rogers_huff_r(gn[:, :])
-r2 = r**2
+                # recalculate major/minor allele
+                major, minor = list(alleles.keys())  # (random init)
+                if alleles[major] < alleles[minor]:
+                    major, minor = minor, major
+                #                                                  
+                new_genotypes = []
+                for i in range(n):
+                    new_genotype = [None, None]
+                    for j in range(2):  # diploid
+                        if genos[i][j] == major:
+                            new_genotype[j] = 0
+                        else:
+                            new_genotype[j] = 1
+                    #                                              
+                    new_genotypes.append(new_genotype)
+                #
+                geno_mat.append(new_genotypes)
+                pos_mat.append(pos)
+#
+if len(geno_mat) > 2:
+    r2, dist = ld(geno_mat, pos_mat)
+    r2s.append(r2)
+    dists.append(dist)
+    
+r2 = np.concatenate(r2s)
+dist = np.concatenate(dists)
 
 ### discretize                                                   
 bins = np.logspace(np.log10(min_val), np.log10(max_val), numbins)
@@ -87,7 +106,7 @@ midpt =  bins[:-1] + (bins[1:] - bins[:-1])/2
 plt.plot(midpt, r2_means, marker='o', linestyle='-')
 plt.xscale('log')
 plt.xlabel("Distance between SNPs (bp)")
-plt.ylabel(r"Mean $r^2 in bin$")
+plt.ylabel(r"mean $r^2$")
 plt.title("LD decay")
 plt.tight_layout()
 plt.savefig("ld_decay.pdf")
