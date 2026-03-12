@@ -1,0 +1,22 @@
+name: test
+channels:
+  - conda-forge
+  - anaconda
+  - bioconda
+dependencies:
+  - numpy
+  - sra-tools
+  - fastqc
+  - fastp
+  - multiqc
+  - bwa
+  - seqtk
+  - samtools
+  - python=3.9  # maybe 3.8?
+  - plink
+  - vcftools
+  - pip:
+      - matplotlib
+      - numpy
+      - scikit-allel
+      - scipy
