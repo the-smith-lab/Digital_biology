@@ -35,4 +35,5 @@ rm Miniconda3-latest-Linux-x86_64.sh  # clean up
 
 ### install software we want
 echo "installing tools"
-mamba env create -f Conda/class_project.yml
+wget https://raw.githubusercontent.com/the-smith-lab/Digital_biology/refs/heads/main/Conda/class_project.yml
+mamba env create -f class_project.yml
