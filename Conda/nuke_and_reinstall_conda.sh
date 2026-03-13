@@ -1,6 +1,6 @@
 #!/bin/bash  
 #SBATCH --account=c01988
-#SBATCH --time=2:00:00
+#SBATCH --time=3:00:00
 #SBATCH --mem=20gb
 
 ### remove existing conda
@@ -11,7 +11,6 @@ for i in $(seq ${CONDA_SHLVL}); do
 done
 rm -rf ~/.mamba  # important if your mamba install got interrupted
 rm -rf ~/.conda
-rm Miniconda3-latest-Linux-x86_64.sh
 conda init --reverse bash
 sed -i '/DigitalBio/d' ~/.bashrc
 sed -i '/activate conda env/d' ~/.bashrc
@@ -36,4 +35,4 @@ rm Miniconda3-latest-Linux-x86_64.sh  # clean up
 
 ### install software we want
 echo "installing tools"
-mamba install emboss blast sra-tools==3.2.1 fastqc fastp multiqc -c bioconda -c conda-forge -c bioconda --yes 
+mamba env create -f Conda/class_project.yml
