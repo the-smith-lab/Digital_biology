@@ -25,15 +25,15 @@ bash Miniconda3-latest-Linux-x86_64.sh -b -p ~/Miniconda  # install
 source ~/Miniconda/etc/profile.d/conda.sh  # tell bash where to look for conda
 conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
 conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
-conda create -n "DigitalBio" --yes  # creates a new conda environment
-conda init bash
-printf '\n# activate conda env\n' >> ~/.bashrc
-printf '[[ $- == *i* ]] && conda activate DigitalBio\n' >> ~/.bashrc  # interactive only
-conda activate DigitalBio  # loads the new conda env                                                                                                                                         
-conda install mamba -c conda-forge --yes  # installs mamba, another installer program
 rm Miniconda3-latest-Linux-x86_64.sh  # clean up
+conda install mamba -c conda-forge --yes  # installs mamba, another installer program
 
 ### install software we want
 echo "installing tools"
 wget https://raw.githubusercontent.com/the-smith-lab/Digital_biology/refs/heads/main/Conda/class_project.yml
-mamba env create -f class_project.yml
+mamba env create -f class_project.yml --yes
+conda init bash
+printf '\n# activate conda env\n' >> ~/.bashrc
+printf '[[ $- == *i* ]] && conda activate DigitalBio\n' >> ~/.bashrc  # interactive only
+source ~/.bashrc
+conda activate DigitalBio  # loads the new conda env
