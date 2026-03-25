@@ -14,15 +14,16 @@ rm -rf ~/.conda
 conda init --reverse bash
 sed -i '/DigitalBio/d' ~/.bashrc
 sed -i '/activate conda env/d' ~/.bashrc
-source ~/.bashrc
 rm -rf ~/Miniconda
+unset PYTHONPATH
+
 
 ### install conda
 echo "installing conda"
 cd  # go home
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh  # download
 bash Miniconda3-latest-Linux-x86_64.sh -b -p ~/Miniconda  # install
-source ~/Miniconda/etc/profile.d/conda.sh  # tell bash where to look for conda
+conda activate base  # might be necessary inside script
 conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
 conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
 rm Miniconda3-latest-Linux-x86_64.sh  # clean up
