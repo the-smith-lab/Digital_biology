@@ -3,6 +3,7 @@
 print("loading software")
 library(conStruct)  #install.zpackages("conStruct")
 library(geosphere)  #install.packages("geosphere")
+library(maps)
 args <- commandArgs(trailingOnly = TRUE)  # print(args)
 setwd("./")
 pref=args[1]
@@ -34,6 +35,20 @@ my.run <- conStruct(spatial = F,
                     geoDist = dists,
                     coords = locs,
                     prefix = fp)
+
+print("1")
+fp = paste(pref, "_K", K, "_map.pdf", sep="")
+print("2")
+admix.props <- my.run$chain_1$MAP$admix.proportions
+print("3")
+pdf(file = fp, width = 7, height = 5)  # width & height in inches
+print("4")
+maps::map(xlim = range(locs[,1]) + c(-5,5), ylim = range(locs[,2])+c(-2,2), col="gray")
+print("5")
+make.admix.pie.plot(admix.proportions = admix.props, coords = locs, add = TRUE)
+print("6")
+dev.off()
+print("7")
 } else {
 
 ### cross validation
@@ -74,7 +89,6 @@ plot(rowMeans(sp.results),
      ylab="predictive accuracy",xlab="values of K",
      ylim=range(sp.results,nsp.results),
      main="cross-validation results")
-#    points(rowMeans(nsp.results),col="green",pch=19)
 segments(x0 = 1:nrow(sp.results),
          y0 = sp.CIs[1,],
          x1 = 1:nrow(sp.results),
