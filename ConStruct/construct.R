@@ -36,19 +36,12 @@ my.run <- conStruct(spatial = F,
                     coords = locs,
                     prefix = fp)
 
-print("1")
 fp = paste(pref, "_K", K, "_map.pdf", sep="")
-print("2")
 admix.props <- my.run$chain_1$MAP$admix.proportions
-print("3")
 pdf(file = fp, width = 7, height = 5)  # width & height in inches
-print("4")
 maps::map(xlim = range(locs[,1]) + c(-5,5), ylim = range(locs[,2])+c(-2,2), col="gray")
-print("5")
 make.admix.pie.plot(admix.proportions = admix.props, coords = locs, add = TRUE)
-print("6")
 dev.off()
-print("7")
 } else {
 
 ### cross validation
@@ -94,6 +87,10 @@ segments(x0 = 1:nrow(sp.results),
          x1 = 1:nrow(sp.results),
          y1 = sp.CIs[2,],
          col = "blue",lwd=2)
-points(rowMeans(nsp.results),col="green",pch=19)
+points(rowMeans(nsp.results),col="green",pch=17)
+legend("bottomright",
+       legend = c("spatial model", "non-spatial model"),
+       col = c("blue", "green"),
+       pch = c(19, 17))
 dev.off()
 }
