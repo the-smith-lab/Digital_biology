@@ -1,6 +1,7 @@
 
 ### settings and command line args
 print("loading software")
+set.seed(123)
 library(conStruct)  #install.zpackages("conStruct")
 library(geosphere)  #install.packages("geosphere")
 library(maps)
