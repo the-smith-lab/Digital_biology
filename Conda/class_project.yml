@@ -15,7 +15,6 @@ dependencies:
   - python=3.9  # maybe 3.8?
   - plink
   - vcftools
-  - r
   - pip:
       - matplotlib
       - numpy
