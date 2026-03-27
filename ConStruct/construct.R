@@ -1,6 +1,8 @@
 
 ### settings and command line args
 print("loading software")
+.libPaths(c("/N/scratch/chriscs/Public/R_032626/", .libPaths()))
+find.package("conStruct")
 set.seed(123)
 library(conStruct)  #install.zpackages("conStruct")
 library(geosphere)  #install.packages("geosphere")
@@ -48,7 +50,7 @@ dev.off()
 ### cross validation
 my.xvals <- x.validation(train.prop = 0.9,
                          n.reps = 8,
-                         K = 1:7,
+                         K = 1:6,
                          freqs = freqs,
                          data.partitions = NULL,
                          geoDist = dists,
