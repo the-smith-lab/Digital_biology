@@ -1,16 +1,17 @@
 
 ### settings and command line args
 print("loading software")
-.libPaths(c("/N/scratch/chriscs/Public/R_032626/", .libPaths()))
-find.package("conStruct")
-set.seed(123)
-library(conStruct)  #install.zpackages("conStruct")
-library(geosphere)  #install.packages("geosphere")
-library(maps)
 args <- commandArgs(trailingOnly = TRUE)  # print(args)
+libs=args[1]
+pref=args[2]
+K=args[3]
+.libPaths(c(libs, .libPaths()))  # set lib path to use speified path
+find.package("conStruct")
+library(conStruct)
+library(geosphere)
+library(maps)
 setwd("./")
-pref=args[1]
-K=args[2]
+set.seed(123)
 
 ### read and preprocess  #vignette(topic="format-data",package="conStruct")
 print("reading vcf")
