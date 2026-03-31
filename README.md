@@ -1,5 +1,6 @@
 This repo contains auxiliary teaching and assignment resources for Digital Biology, a grad/undergrad bioinformatics course taught at Indiana University.
 
+
 # Troubleshooting Notes
 Here we will compile topics flagged in class as confusing, challenging, or that lead to computer errors.
 
@@ -63,5 +64,6 @@ Class project? -> `/N/slate/`  (long term storage for intermediate-sized files)
 Assignments? -> `/N/slate/` is fine. Scratch is also fine if your run out of space, but it gets deleted after 30 days.
 
 Temporary files? -> `/N/scratch/`
+
 
 
