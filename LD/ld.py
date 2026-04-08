@@ -6,6 +6,7 @@ import numpy as np
 from scipy.spatial.distance import pdist
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
+import random
 
 ### params
 infile = sys.argv[1]
@@ -14,6 +15,11 @@ min_val = 1
 max_val = 1e9
 
 def ld(geno_mat, pos_mat):
+    cap = 5000
+    if len(geno_mat) > cap:
+        indx = random.sample(range(len(geno_mat)), cap)
+        geno_mat = [geno_mat[i] for i in indx]
+        pos_mat = [pos_mat[i] for i in indx]
     geno_mat = np.array(geno_mat)
     pos_mat = np.array(pos_mat)
     g = allel.GenotypeArray(geno_mat)

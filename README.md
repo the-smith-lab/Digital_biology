@@ -1,4 +1,4 @@
-This repo contains auxiliary teaching and assignment resources for Digital Biology, a grad/undergrad bioinformatics course taught at Indiana University.
+This repo contains auxiliary teaching resources for Digital Biology, a grad/undergrad bioinformatics course taught at Indiana University.
 
 # Common HPC error messages
 - `Killed`: with no other info could be multiple things, but most commonly you need more memory.
