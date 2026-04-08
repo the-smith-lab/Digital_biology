@@ -1,5 +1,9 @@
 This repo contains auxiliary teaching and assignment resources for Digital Biology, a grad/undergrad bioinformatics course taught at Indiana University.
 
+# Common HPC error messages
+- `Killed`: with no other info could be multiple things, but most commonly you need more memory.
+- `OOM`: "out of memory"
+- `Disk quota exceeded`: ran out of storage space. Need to make space or move over to `scratch/`.
 
 # Troubleshooting Notes
 Here we will compile topics flagged in class as confusing, challenging, or that lead to computer errors.
