@@ -4,7 +4,7 @@ fp = sys.argv[1]
 
 with open(fp) as infile:
     for line in infile:
-        if line[0:2] == "#!":
+        if line[0] == "#":
             pass
         else:
             newline = line.strip().split()
@@ -19,7 +19,7 @@ with open(fp) as infile:
                     genename = "\"NA\""
                 transcriptid_idx = newline.index("transcript_id")
                 transcriptid = newline[transcriptid_idx+1].split("\"")[1]
-                transcriptversion_idx = newline.index("transcript_version")
-                transcriptversion = newline[transcriptversion_idx+1].split("\"")[1]
-                transcriptid = ".".join([transcriptid,transcriptversion])
+                #transcriptversion_idx = newline.index("transcript_version")
+                #transcriptversion = newline[transcriptversion_idx+1].split("\"")[1]
+                #transcriptid = ".".join([transcriptid,transcriptversion])
                 print("\t".join([transcriptid, geneid, genename]))
