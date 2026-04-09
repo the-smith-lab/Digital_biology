@@ -1,17 +1,22 @@
-.libPaths(c("/N/scratch/chriscs/Public/Week_12/R_BIGRED/", .libPaths()))
+args <- commandArgs(trailingOnly = TRUE)  # print(args)
+libs=args[1]
+sample_file=args[2]
+map_file=args[3]
+.libPaths(c(libs, .libPaths()))  # set lib path to use speified path
+print(find.package("DESeq2"))
 library(tximport)
 library(DESeq2)
 
 ### read transcript-to-gene mapping file
 gene_map = read.table(
-  "Reference_transcriptome/gene_map.txt",
+  map_file,
   sep = "\t",
   header = TRUE,
   stringsAsFactors = FALSE
 )
 
 ### read sample metadata
-samples = read.table("samples.txt", header=T)  # tab-sep: accession, treatment, file
+samples = read.table(sample_file, header=T)  # tab-sep: accession, treatment, file
 samples$treatment = factor(samples$treatment)
 
 ### convert transcript-level counts to gene-level
@@ -32,7 +37,7 @@ samples$treatment = factor(samples$treatment)
 #     DESeqDataSetFromTximport() automaticaly uses data$length
 #     lengths <- txi$length
 # It outputs "using 'avgTxLength' from assays(dds)"
-# Conclusion: both approaches address a similar goal; deseq2 says to do it this way.
+# Conclusion: both approaches address a similar goal; deseq2 docs say to do it this way.
 data = tximport(samples$file, type = "salmon", tx2gene = gene_map)
 
 ### run deseq2
@@ -43,6 +48,11 @@ ddsTxi = DESeqDataSetFromTximport(data,
 ddsTxi = ddsTxi[rowSums(counts(ddsTxi)) > 1, ]  # filter genes with total counts <1
 dds = DESeq(ddsTxi)
 res = results(dds, name="treatment_infected_vs_control")  # resultsNames(dds) # lists the coefficient names- need this to match
+write.table(as.data.frame(res),
+            file = "results.txt",
+            sep = "\t",
+            quote = FALSE,
+            row.names = TRUE)
 
 ### plot
 pdf("de.pdf", width = 5, height = 5)  # width & height in inches
