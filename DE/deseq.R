@@ -45,7 +45,7 @@ ddsTxi = DESeqDataSetFromTximport(data,
                                   colData = samples,
                                   design = ~ treatment)
 
-ddsTxi = ddsTxi[rowSums(counts(ddsTxi)) > 1, ]  # filter genes with total counts <1
+ddsTxi = ddsTxi[rowSums(counts(ddsTxi)) > 10, ]  # filter genes with total counts <10
 dds = DESeq(ddsTxi)
 res = results(dds, contrast = c("treatment", "infected", "control"))  # "infected" -> "control" this controls the direction of change
 res = as.data.frame(res)
