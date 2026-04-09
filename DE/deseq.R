@@ -1,11 +1,8 @@
-
 .libPaths(c("/N/scratch/chriscs/Public/Week_12/R_BIGRED/", .libPaths()))
-print(find.package("tximport"))
-library(readr)
 library(tximport)
 library(DESeq2)
 
-# read transcript-to-gene mapping file
+### read transcript-to-gene mapping file
 gene_map = read.table(
   "Reference_transcriptome/gene_map.txt",
   sep = "\t",
@@ -13,11 +10,11 @@ gene_map = read.table(
   stringsAsFactors = FALSE
 )
 
-#
+### read sample metadata
 samples = read.table("samples.txt", header=T)  # tab-sep: accession, treatment, file
+samples$treatment = factor(samples$treatment)
 
-
-
+### convert transcript-level counts to gene-level
 # https://github.com/thelovelab/tximport/blob/devel/R/helper.R#L26
 #     newCounts <- abundanceMat * rowMeans(lengthMat)
 #     Seems to rescale back to counts-like scale/units;
@@ -34,34 +31,26 @@ samples = read.table("samples.txt", header=T)  # tab-sep: accession, treatment, 
 # https://github.com/thelovelab/DESeq2/blob/devel/R/AllClasses.R#L419
 #     DESeqDataSetFromTximport() automaticaly uses data$length
 #     lengths <- txi$length
+# It outputs "using 'avgTxLength' from assays(dds)"
 # Conclusion: both approaches address a similar goal; deseq2 says to do it this way.
 data = tximport(samples$file, type = "salmon", tx2gene = gene_map)
 
-
-samples$treatment = factor(samples$treatment)
-
+### run deseq2
 ddsTxi = DESeqDataSetFromTximport(data,
-                                   colData = samples,
-                                   design = ~ treatment)
+                                  colData = samples,
+                                  design = ~ treatment)
 
 ddsTxi = ddsTxi[rowSums(counts(ddsTxi)) > 1, ]  # filter genes with total counts <1
-
 dds = DESeq(ddsTxi)
+res = results(dds, name="treatment_infected_vs_control")  # resultsNames(dds) # lists the coefficient names- need this to match
 
-resultsNames(dds) # lists the coefficient names- need this to match below
-
-res = results(dds, name="treatment_infected_vs_control")
-
-resOrdered = res[order(res$padj), ]
-head(resOrdered)
-
-# plot
-resOrdered = as.data.frame(resOrdered)
-resOrdered$gene = rownames(resOrdered)
-sig = resOrdered$padj < 0.05 & abs(resOrdered$log2FoldChange) > 1
-plot(resOrdered$log2FoldChange, -log10(resOrdered$padj),
+### plot
+pdf("de.pdf", width = 5, height = 5)  # width & height in inches
+res = res[!is.na(res$padj),]
+sig = res$padj < 0.05 & abs(res$log2FoldChange) > 1
+plot(res$log2FoldChange, -log10(res$padj),
      pch = 20,
-     col = ifelse(sig, "red", "grey"),
+     col = ifelse(sig, "darkgreen", "grey"),
      xlab = "Log2 Fold Change",
-     ylab = "-Log10 Adjusted p-value",
-     main = "Volcano Plot")
+     ylab = "-Log10 Adjusted p-value")
+dev.off()
