@@ -47,17 +47,19 @@ ddsTxi = DESeqDataSetFromTximport(data,
 
 ddsTxi = ddsTxi[rowSums(counts(ddsTxi)) > 1, ]  # filter genes with total counts <1
 dds = DESeq(ddsTxi)
-res = results(dds, name="treatment_infected_vs_control")  # resultsNames(dds) # lists the coefficient names- need this to match
-write.table(as.data.frame(res),
+res = results(dds, contrast = c("treatment", "infected", "control"))  # "infected" -> "control" this controls the direction of change
+res = as.data.frame(res)
+res$gene_id <- rownames(res)
+write.table(res,
             file = "results.txt",
             sep = "\t",
-            quote = FALSE,
-            row.names = TRUE)
+            row.names = F,
+	    quote = F)
 
 ### plot
 pdf("de.pdf", width = 5, height = 5)  # width & height in inches
 res = res[!is.na(res$padj),]
-sig = res$padj < 0.05 & abs(res$log2FoldChange) > 1
+sig = res$padj < 1e-10 & abs(res$log2FoldChange) > 2
 plot(res$log2FoldChange, -log10(res$padj),
      pch = 20,
      col = ifelse(sig, "darkgreen", "grey"),
