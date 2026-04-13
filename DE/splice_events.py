@@ -1,4 +1,6 @@
+# e.g., python ~/../Software/Digital_biology/DE/splice_events.py ENSMUSG00000051951.6
 import sys
+import subprocess
 
 lookup = sys.argv[1]
 fp_gene_map = "/N/scratch/chriscs/Digital_biology/Splicing/Reference_transcriptome/gene_map.txt"
@@ -17,34 +19,36 @@ with open(fp_gene_map) as infile:
 
 ### get transcript sequences
 seq = False
-seqs = {}
-with open(fp_ref) as infile:        
-    for line in infile:
-        if seq is True:  # inside sequence    
-            newline = line.strip()
-            if newline[0] != ">":
-                sequence += newline
-            else:  # end of sequence
-                seqs[transcript] = sequence
-                seq = False
-        if seq is False:  # not "else", b/c check for hit immediately following
-            newline = line.strip()
-            if newline[0] != ">":
-                pass
-            else:
-                transcript = newline.split(">")[1]
-                if transcript in gene_map[lookup]:
-                    seq = True
-                    sequence = ""
-
-from Bio import pairwise2
-from Bio.pairwise2 import format_alignment
-
-n = len(seqs)
-for s1 in range(n-1):
-    for s2 in range(s1+1, n):
-        print(s1,s2)
+with open(fp_ref) as infile:
+    with open(lookup + ".fasta", "w") as outfile:
+        for line in infile:
+            if seq is True:  # inside sequence    
+                newline = line.strip()
+                if newline[0] != ">":
+                    #sequence += newline
+                    #print(newline)
+                    outfile.write(newline + "\n")
+                else:  # end of sequence
+                    seq = False
+            if seq is False:  # not "else", b/c check for hit immediately following
+                newline = line.strip()
+                if newline[0] != ">":
+                    pass
+                else:
+                    transcript = newline.split(">")[1]
+                    if transcript in gene_map[lookup]:
+                        #print(newline)
+                        outfile.write(newline + "\n")
+                        seq = True
+                        sequence = ""
         
-
-                
-
+### gmap
+# gmap_build Mus_musculus.GRCm39.dna.primary_assembly.fa -d Mus_musculus.GRCm39_index -D .
+cmd = "gmap -D . -d Mus_musculus.GRCm39_index -f samse " + lookup + ".fasta > " + lookup + ".sam"
+subprocess.run(cmd, shell=True)
+cmd = "samtools view -bS " + lookup + ".sam > " + lookup + ".bam"
+subprocess.run(cmd, shell=True)
+cmd = "samtools sort " + lookup + ".bam -o " + lookup + ".sorted.bam"
+subprocess.run(cmd, shell=True)
+cmd = "samtools index " + lookup + ".sorted.bam"
+subprocess.run(cmd, shell=True)
