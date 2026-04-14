@@ -39,8 +39,21 @@ my.run <- conStruct(spatial = F,
                     geoDist = dists,
                     coords = locs,
                     prefix = fp)
-
 fp = paste(pref, "_K", K, "_map.pdf", sep="")
+admix.props <- my.run$chain_1$MAP$admix.proportions
+pdf(file = fp, width = 7, height = 5)  # width & height in inches
+maps::map(xlim = range(locs[,1]) + c(-5,5), ylim = range(locs[,2])+c(-2,2), col="gray")
+make.admix.pie.plot(admix.proportions = admix.props, coords = locs, add = TRUE)
+dev.off()
+#
+fp = paste(pref, "_SPATIAL_K", K, sep="")
+my.run <- conStruct(spatial = T,
+                    K = as.integer(K),
+                    freqs = freqs,
+                    geoDist = dists,
+                    coords = locs,
+                    prefix = fp)
+fp = paste(pref, "_SPATIAL_K", K, "_map.pdf", sep="")
 admix.props <- my.run$chain_1$MAP$admix.proportions
 pdf(file = fp, width = 7, height = 5)  # width & height in inches
 maps::map(xlim = range(locs[,1]) + c(-5,5), ylim = range(locs[,2])+c(-2,2), col="gray")
