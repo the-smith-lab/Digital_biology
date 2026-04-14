@@ -63,11 +63,14 @@ with open(infile) as vcf:
             pos = float(newline[1])
             for field in range(9, len(newline)):
                 geno = newline[field].split(":")[0].split("/")
-                alleles.setdefault(int(geno[0]), 0)
-                alleles[int(geno[0])] += 1
-                alleles.setdefault(int(geno[1]), 0)
-                alleles[int(geno[1])] += 1
-                genos.append( [int(geno[0]), int(geno[1])] )  # still phased at this point
+                if "." in geno:
+                    genos.append( [np.nan, np.nan] )
+                else:
+                    alleles.setdefault(int(geno[0]), 0)
+                    alleles[int(geno[0])] += 1
+                    alleles.setdefault(int(geno[1]), 0)
+                    alleles[int(geno[1])] += 1
+                    genos.append( [int(geno[0]), int(geno[1])] )  # still "phased" at this point
 
             #
             if len(list(alleles.keys())) == 2:  # filters for biallelic
