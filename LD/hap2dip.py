@@ -20,8 +20,6 @@ with open(infile) as vcf:
                 samp = newline[field]
                 geno = newline[field].split(":")[0]  # haploid genotype
                 newgeno = [geno + "/" + geno]  # diploid
-                newgeno += newline[field].split(":")[1:]
                 genos.append(":".join(newgeno))
             outline = beginning + genos
-            print(outline)
             print("\t".join(outline))
