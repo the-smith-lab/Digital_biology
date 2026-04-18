@@ -17,6 +17,7 @@ set.seed(123)
 print("reading vcf")
 fp = paste(pref, ".012", sep="")
 genos = read.table(fp, row.names = 1, header=F)
+genos[genos == -1] = NA
 freqs = genos / 2  # convert allele counts to frequencies in each indiv
 freqs = as.matrix(freqs)
 dim(freqs)
