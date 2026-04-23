@@ -2,6 +2,8 @@ args <- commandArgs(trailingOnly = TRUE)  # print(args)
 inpath=args[1]
 
 data <- read.table(inpath, header=TRUE)
+pred = "ADD"
+data = data[data$TEST == pred, ]
 chr_len <- aggregate(BP ~ CHR, data, max)
 chr_len$offset <- c(0, cumsum(chr_len$BP[-nrow(chr_len)]))
 data <- merge(data, chr_len[, c("CHR", "offset")], by="CHR")
