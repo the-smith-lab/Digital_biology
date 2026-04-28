@@ -1,4 +1,4 @@
-name: DigitalBio
+name: Db
 channels:
   - conda-forge
   - anaconda
@@ -12,11 +12,10 @@ dependencies:
   - bwa
   - seqtk
   - samtools
-  - python=3.9  # maybe 3.8?
+  - python=3.9
   - plink
   - vcftools
-  - pip:
-      - matplotlib
-      - numpy
-      - scikit-allel
-      - scipy
+  - matplotlib
+  - numpy
+  - scikit-allel
+  - scipy
